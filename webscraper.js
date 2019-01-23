@@ -1,39 +1,32 @@
+// filesystem
 const fs = require("fs");
 const path = require("path");
 
-const rp = require("request-promise");
-const querystring = require("querystring");
-const request = require("request");
-
+// local dependencies
 const dependenciesFolder = "webscraper-helper";
-const downloadHTML = require(path.join(
+const HTMLDownloadJob = require(path.join(
   __dirname,
   dependenciesFolder,
-  "download.js"
-));
+  "downloadHTML.js"
+)).HTMLDownloadJob;
 
 // url for search term
 const searchURL1 = "https://www.google.com/search?q=";
 const searchURL2 = "&source=lnms&tbm=isch";
-
-const queryTerm = "resistor"; // TODO: loop through this
+const queryTerm = "photon particle"; // TODO: loop through this
 const finalSearchURL = searchURL1 + queryTerm + searchURL2;
-const outputFileName = "images.html";
+
+// html file to download results to
+const outputFileName = queryTerm + ".html";
 const outputFilePath = path.join(__dirname, outputFileName);
 
-// get the html here
-// check if file to store HTML exists
-// console.log(fs);
-if (!fs.existsSync(outputFilePath)) {
-  console.log("File did not exist, downloading again");
-  rp(finalSearchURL)
-    .then(function(html) {
-      downloadHTML(html, outputFilePath);
-    })
-    .catch(function(err) {
-      console.error("34:", err.message);
-    });
-}
+let downloadHTMLJob = new HTMLDownloadJob();
+
+downloadHTMLJob.on("done", details => {
+  console.log(`HTML download job completed on ${details.completedOn}`);
+});
+
+downloadHTMLJob.emit("start", outputFilePath, finalSearchURL);
 
 // const download = function(uri, filename, callback) {
 //   request.head(uri, function(err, res, body) {
