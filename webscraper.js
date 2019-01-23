@@ -9,6 +9,11 @@ const HTMLDownloadJob = require(path.join(
   dependenciesFolder,
   "downloadHTML.js"
 )).HTMLDownloadJob;
+const ExtractImageJob = require(path.join(
+  __dirname,
+  dependenciesFolder,
+  "extractImage.js"
+)).ExtractImageJob;
 
 // url for search term
 const searchURL1 = "https://www.google.com/search?q=";
@@ -18,31 +23,17 @@ const finalSearchURL = searchURL1 + queryTerm + searchURL2;
 
 // html file to download results to
 const outputFileName = queryTerm + ".html";
-const outputFilePath = path.join(__dirname, outputFileName);
+const htmlFolder = "HTMLFolder";
+const htmlFilePath = path.join(__dirname, htmlFolder, outputFileName);
 
-let downloadHTMLJob = new HTMLDownloadJob();
-
+// download HTML webpage of search result
+const downloadHTMLJob = new HTMLDownloadJob();
+const extractImageJob = new ExtractImageJob();
 downloadHTMLJob.on("done", details => {
   console.log(`HTML download job completed on ${details.completedOn}`);
 });
+downloadHTMLJob.on("done", () => {
+  extractImageJob.emit("start", htmlFilePath);
+});
 
-downloadHTMLJob.emit("start", outputFilePath, finalSearchURL);
-
-// const download = function(uri, filename, callback) {
-//   request.head(uri, function(err, res, body) {
-//     console.log("content-type:", res.headers["content-type"]);
-//     console.log("content-length:", res.headers["content-length"]);
-
-//     request(uri)
-//       .pipe(fs.createWriteStream(filename))
-//       .on("close", callback);
-//   });
-// };
-
-// download(
-//   "https://www.google.com/images/srpr/logo3w.png",
-//   "google.png",
-//   function() {
-//     console.log("done");
-//   }
-// );
+downloadHTMLJob.emit("start", htmlFilePath, finalSearchURL);
