@@ -1,8 +1,9 @@
 const EventEmitter = require("events");
 const fs = require("fs");
+const path = require("path");
 const cheerio = require("cheerio");
-const querystring = require("querystring");
-const request = require("request");
+const download = require("image-downloader");
+const escapePathSpaces = require(path.join(__dirname, "escapePathSpaces.js"));
 
 class ExtractImageJob extends EventEmitter {
   constructor(ops) {
@@ -24,15 +25,21 @@ class ExtractImageJob extends EventEmitter {
       this.downloadImage(imageURL, downloadImagePath);
     });
   }
-  downloadImage(imageURL, downloadPath) {
-    request.head(uri, function(err, res, body) {
-      console.log("content-type:", res.headers["content-type"]);
-      console.log("content-length:", res.headers["content-length"]);
+  downloadImage(imageURL, downloadImagePath) {
+    // Download to a directory and save with an another filename
+    const options = {
+      url: imageURL,
+      dest: downloadImagePath + ".jpg"
+    }; // Save to here
 
-      request(uri)
-        .pipe(fs.createWriteStream(filename))
-        .on("close", callback);
-    });
+    download
+      .image(options)
+      .then(({ filename, image }) => {
+        console.log("File saved to", filename);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 }
 module.exports.ExtractImageJob = ExtractImageJob;

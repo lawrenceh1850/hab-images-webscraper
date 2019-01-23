@@ -1,0 +1,63 @@
+Leap Motion
+Photon
+Wire spools (25 ft non-solid core)
+Accelerometers (3 axis)
+Spark Core
+USB to Micro USB Cable (long)
+female USB to male Micro USB Cable 
+Piezo Buzzers
+Mic Amp
+Mini Servo Motor
+USB to wall plug 
+DC toy motor
+Temperature Sensor
+Breadboard
+SD card 8GB 
+Green LED 
+Yellow LED
+Red LED 
+Orange LED 
+Jumper Cables (pin ends) 
+Ultrasonic Sensors
+Myo Arm band
+Silicon wire spool (25 feet)
+2ply Conductive Thread spool
+Capacitive Touch Sensor
+Battery Holder (3 AA) 
+Feather Board 
+Raspberry Pi Zero
+3 axis compass magnetometer
+Golden Solder (cu0.7 rosin core)
+USB A male to USB B male 10 ft cable
+USB A male to USB B male 6 ft cable
+AA 1.5V Alkaline Batteries 
+Operational Amplifier
+Transistor 
+Sound Sensor
+IR Receiver
+Instamorph Prototyping Plastic
+Capacitor (1 microF) 
+Capacitor (0.1 microF)
+Capacitor (0.1 microF) (Axial)
+Capacitor (100 microF) 
+Capacitor (33 microF) (16V)
+Capacitor (2.2 microF) (50V) 
+Capacitor (0.01 microF)
+Capacitor (10 microF) (100V) 
+Capacitor (47 microF) (50V) 
+Capacitor (68 microF) (16V) 
+Cutter and Stripper 
+Precise Cutter and Stripper 
+Vibration Motor
+Big Piezo Buzzer
+Piezo Transducer
+EMAX servo
+Thermistor
+Tiny Mic
+SPST button
+Temperature Sensor
+Tilt Sensor
+DPDT Switch 
+Force Sensitive Resistor
+Shift Register IC 
+Potentiometer
