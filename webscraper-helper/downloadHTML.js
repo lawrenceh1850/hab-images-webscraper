@@ -3,8 +3,6 @@
 const fs = require("fs");
 // query modules
 const rp = require("request-promise");
-const querystring = require("querystring");
-const request = require("request");
 // events
 const EventEmitter = require("events");
 
