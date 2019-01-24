@@ -22,6 +22,7 @@ class ExtractImageJob extends EventEmitter {
       const $ = cheerio.load(data);
       const imageURL = $("img").attr("src");
       console.log(`Image link was: ${imageURL}`);
+      console.log(`Downloading to ${downloadImagePath}`);
       this.downloadImage(imageURL, downloadImagePath);
     });
   }
@@ -43,15 +44,3 @@ class ExtractImageJob extends EventEmitter {
   }
 }
 module.exports.ExtractImageJob = ExtractImageJob;
-
-// const download = function(uri, filename, callback) {
-
-// };
-
-// download(
-//   "https://www.google.com/images/srpr/logo3w.png",
-//   "google.png",
-//   function() {
-//     console.log("done");
-//   }
-// );

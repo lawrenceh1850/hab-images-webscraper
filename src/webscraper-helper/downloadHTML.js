@@ -24,18 +24,23 @@ class HTMLDownloadJob extends EventEmitter {
           fs.writeFile(outputFilePath, htmlText, function(err) {
             if (err) {
               console.log("Error downloading html:", err);
+              return;
             } else {
               console.log("The file was saved!");
             }
           });
+          this.emit("done", {
+            completedOn: new Date(),
+            success: true
+          });
         })
         .catch(function(err) {
           console.log(err.message);
+          return;
         });
-      this.emit("done", { completedOn: new Date() });
     } else {
       console.log(`File ${outputFilePath} already existed`);
-      this.emit("done", { completedOn: new Date() });
+      this.emit("done", { completedOn: new Date(), success: true });
     }
   }
 }
